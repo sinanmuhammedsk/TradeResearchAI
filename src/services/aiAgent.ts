@@ -111,20 +111,36 @@ ${companyData.news.length > 0
 
 Please perform a rigorous financial and qualitative analysis. Ensure that if the CEO name is listed as "N/A", you search your internal knowledge base and identify the correct current CEO of the company and put it in the "ceo" field of the JSON output. Provide a final recommendation ("INVEST", "HOLD", or "PASS"), a confidence score, list of key strengths and risks, a SWOT analysis, and detailed markdown reasoning.`;
 
-    try {
-      const response = await model.invoke([
-        new SystemMessage(systemPrompt),
-        new HumanMessage(humanPrompt),
-      ]);
+    const maxRetries = 3;
+    let attempt = 0;
 
-      const text = typeof response.content === 'string' ? response.content : JSON.stringify(response.content);
-      const cleaned = text.trim();
-      
-      const result: AIAnalysisResult = JSON.parse(cleaned);
-      return result;
-    } catch (error: any) {
-      console.error('AI Agent error:', error);
-      throw new Error(`AI agent analysis failed: ${error.message || error}`);
+    while (attempt < maxRetries) {
+      try {
+        const response = await model.invoke([
+          new SystemMessage(systemPrompt),
+          new HumanMessage(humanPrompt),
+        ]);
+
+        const text = typeof response.content === 'string' ? response.content : JSON.stringify(response.content);
+        const cleaned = text.trim();
+        
+        const result: AIAnalysisResult = JSON.parse(cleaned);
+        return result;
+      } catch (error: any) {
+        attempt++;
+        const errorMessage = error.message || "";
+        const isRateLimit = errorMessage.includes("429") || error.status === 429 || errorMessage.toLowerCase().includes("quota") || errorMessage.toLowerCase().includes("limit");
+
+        if (isRateLimit && attempt < maxRetries) {
+          const delay = attempt * 2500;
+          console.warn(`[AI Agent] Rate limit or quota error encountered. Retrying in ${delay}ms (Attempt ${attempt}/${maxRetries})...`);
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        } else {
+          console.error(`[AI Agent] Analysis failed on attempt ${attempt} of ${maxRetries}:`, error);
+          throw new Error(error.message || error);
+        }
+      }
     }
+    throw new Error("AI agent analysis failed: Max retry limits exceeded.");
   }
 }
