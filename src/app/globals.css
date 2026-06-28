@@ -1,0 +1,158 @@
+@import "tailwindcss";
+@import "../styles/animations.css";
+
+:root {
+  --background: #050505; /* Deep matte black background */
+  --foreground: #f4f4f5; /* Zinc-100 cream text */
+  --card-bg: rgba(12, 12, 14, 0.65); /* Premium glass background */
+  --card-border: rgba(234, 179, 8, 0.12); /* Thin gold border */
+  --accent-glow: rgba(234, 179, 8, 0.05); /* Soft gold glow */
+  --primary-gold: #eab308;
+  --secondary-gold: #fbbf24;
+  --primary-gold-rgb: 234, 179, 8;
+}
+
+body {
+  background: radial-gradient(circle at 50% 20%, rgba(234, 179, 8, 0.07), transparent 45%), #050505;
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Custom premium styling utilities */
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(234, 179, 8, 0.04);
+}
+
+.glass-card-hover {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-1.5px);
+  border-color: rgba(234, 179, 8, 0.35); /* Glowing Gold on hover */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(234, 179, 8, 0.1);
+}
+
+/* Premium scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* AI Report Markdown Styling */
+.prose-ai {
+  font-size: 0.975rem;
+  line-height: 1.625;
+  color: #e4e4e7; /* Light zinc-200 for report body text */
+}
+
+.prose-ai p {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-ai h1, .prose-ai h2, .prose-ai h3, .prose-ai h4 {
+  color: #fbbf24; /* Glowing gold headings */
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-ai h2 {
+  font-size: 1.25rem;
+  border-bottom: 1px solid rgba(234, 179, 8, 0.2); /* Thin gold bottom border */
+  padding-bottom: 0.25rem;
+}
+
+.prose-ai h3 {
+  font-size: 1.1rem;
+}
+
+.prose-ai ul, .prose-ai ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1.25rem;
+}
+
+.prose-ai ul {
+  list-style-type: disc;
+}
+
+.prose-ai ol {
+  list-style-type: decimal;
+}
+
+.prose-ai li {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.prose-ai strong {
+  color: #f59e0b; /* Bright amber gold for bold text */
+  font-weight: 600;
+}
+
+.prose-ai table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.prose-ai th {
+  background-color: #1a1711; /* Gold-dark header fill */
+  color: #fbbf24;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(234, 179, 8, 0.25);
+}
+
+.prose-ai td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(234, 179, 8, 0.15);
+  color: #e4e4e7;
+}
+
+.prose-ai tr:nth-child(even) {
+  background-color: #161618; /* Dark row striping */
+}
+
+.prose-ai blockquote {
+  border-left: 4px solid #d97706; /* Solid gold accent border */
+  background-color: #1c180e; /* Dark gold-tinted box background */
+  padding: 0.5rem 1rem;
+  border-radius: 0 4px 4px 0;
+  color: #fbbf24; /* Gold blockquote text */
+  font-style: italic;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Pulsing loader segments */
+@keyframes shimer {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+.animate-shimer {
+  animation: shimer 1.5s infinite ease-in-out;
+}

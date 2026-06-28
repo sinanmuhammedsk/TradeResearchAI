@@ -1,0 +1,34 @@
+/* Creator modal and button animation custom styles */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0px); }
+}
+
+.creator-modal-animate {
+  animation: float 4s ease-in-out infinite;
+}
+
+.gold-glow-behind {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(245, 163, 0, 0.1) 0%, rgba(245, 163, 0, 0) 75%);
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(15px);
+}
+
+.creator-button-glow {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.creator-button-glow:hover {
+  box-shadow: 0 0 12px rgba(245, 163, 0, 0.2);
+  border-color: rgba(245, 163, 0, 0.45);
+  transform: scale(1.02);
+}
