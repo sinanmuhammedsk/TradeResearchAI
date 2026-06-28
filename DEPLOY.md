@@ -55,6 +55,6 @@ Once Git is installed, navigate to your project directory (`c:\Users\ASUS\resarc
 4. **Environment Variables Config** (Critical):
    * Scroll down to the **Environment Variables** section.
    * Add a new key: `GEMINI_API_KEY`
-   * Value: `AQ.Ab8RN6IuZUyRXuS0wAumE7zhO29w8fDyKryD-sBAxvS7vxjjzA` (or your preferred Google AI Studio key).
+   * Value: `<YOUR_GEMINI_API_KEY>` (copy this key from your local `.env.local` file).
 5. Click **Deploy**.
 6. Vercel will compile and host your AI investment scanner in under 2 minutes!
